@@ -1,46 +1,57 @@
 {
-  "name": "devlulcas-md",
-  "version": "1.1.1",
-  "description": "Custom markdown syntax with remark and unified",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "src/index.ts",
-  "files": [
-    "dist",
-    "package.json",
-    "LICENSE",
-    "README.md"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
-  },
-  "keywords": [
-    "markdown",
-    "md",
-    "remark",
-    "unified",
-    "mdast",
-    "blog",
-    "content"
-  ],
-  "author": "devlulcas",
-  "license": "GLWTPL",
-  "devDependencies": {
-    "@types/hast": "^3.0.4",
-    "@types/mdast": "^4.0.4",
-    "@types/unist": "^3.0.2",
-    "remark": "^15.0.1",
-    "remark-html": "^16.0.1",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
-    "unified": "^11.0.5",
-    "vitest": "^1.6.0"
-  },
-  "dependencies": {
-    "unist-util-visit": "^5.0.0"
-  }
+	"name": "devlulcas-md",
+	"version": "1.1.1",
+	"description": "Custom markdown syntax with remark and unified",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"package.json",
+		"LICENSE",
+		"README.md"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"typecheck": "tsc -p tsconfig.json --noEmit"
+	},
+	"keywords": [
+		"markdown",
+		"md",
+		"remark",
+		"unified",
+		"mdast",
+		"blog",
+		"content"
+	],
+	"author": "devlulcas",
+	"license": "GLWTPL",
+	"devDependencies": {
+		"@biomejs/biome": "2.3.11",
+		"@types/hast": "^3.0.4",
+		"@types/mdast": "^4.0.4",
+		"@types/node": "^25.0.9",
+		"@types/unist": "^3.0.3",
+		"mdast-util-directive": "^3.1.0",
+		"rehype-format": "^5.0.1",
+		"rehype-stringify": "^10.0.1",
+		"remark": "^15.0.1",
+		"remark-directive": "^4.0.0",
+		"remark-html": "^16.0.1",
+		"remark-parse": "^11.0.0",
+		"remark-rehype": "^11.1.2",
+		"to-vfile": "^8.0.0",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3",
+		"unified": "^11.0.5",
+		"vitest": "^4.0.17"
+	},
+	"dependencies": {
+		"hastscript": "^9.0.1",
+		"unist-util-visit": "^5.0.0",
+		"vfile": "^6.0.3"
+	}
 }
