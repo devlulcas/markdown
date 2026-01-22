@@ -36,8 +36,6 @@ export const remarkBetterImages: RemarkBetterImages = (pluginOptions) => {
 	return (tree: mdast.Root) => {
 		visit(tree, (node) => {
 			if (node.type !== "image") return CONTINUE;
-
-			console.log(node.url, options.baseUrl);
 			node.url = new URL(node.url, options.baseUrl).toString();
 
 			node.data ??= {};

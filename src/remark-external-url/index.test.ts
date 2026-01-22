@@ -44,6 +44,42 @@ test("should not add _blank in links if the website domain is the same as the in
 	expect(resultShort.toString()).not.toContain('target="_blank"');
 });
 
+test("should not add _blank in links with subdomains of the same domain", async () => {
+	const markdownWww = "[website](https://www.example.com)";
+	const markdownBlog = "[blog](https://blog.example.com)";
+	const markdownDeep = "[deep](https://sub.blog.example.com)";
+
+	const file = unified()
+		.use(remarkParse)
+		.use(remarkExternalUrl, { domain: "example.com" })
+		.use(remarkRehype)
+		.use(rehypeFormat)
+		.use(rehypeStringify);
+
+	const resultWww = await file.process(markdownWww);
+	const resultBlog = await file.process(markdownBlog);
+	const resultDeep = await file.process(markdownDeep);
+
+	expect(resultWww.toString()).not.toContain('target="_blank"');
+	expect(resultBlog.toString()).not.toContain('target="_blank"');
+	expect(resultDeep.toString()).not.toContain('target="_blank"');
+});
+
+test("should add _blank for domains that end with the same string but are not subdomains", async () => {
+	const markdown = "[website](https://notexample.com)";
+
+	const file = unified()
+		.use(remarkParse)
+		.use(remarkExternalUrl, { domain: "example.com" })
+		.use(remarkRehype)
+		.use(rehypeFormat)
+		.use(rehypeStringify);
+
+	const result = await file.process(markdown);
+
+	expect(result.toString()).toContain('target="_blank"');
+});
+
 test("should ignore images", async () => {
 	const markdown = "![alt](https://example.com/image)";
 

@@ -23,7 +23,7 @@ export const remarkNotes: RemarkNotes = (
 				const className = attributes.class || "";
 
 				if (!validClasses?.includes(className)) {
-					file.fail(`note: invalid class name: ${className}`, node);
+					return file.fail(`note: invalid class name: ${className}`, node);
 				}
 
 				const blockquoteNode = h("blockquote", { class: className });

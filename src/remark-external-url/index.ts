@@ -24,13 +24,12 @@ export const remarkExternalUrl: RemarkExternalUrl = ({ domain }) => {
 			}
 
 			if (!URL.canParse(node.url)) {
-				file.fail("remark-external-url: invalid URL", node);
-				return CONTINUE;
+				return file.fail("remark-external-url: invalid URL", node);
 			}
 
 			const url = new URL(node.url);
 			const hostname = url.hostname;
-			const isSameDomain = hostname === domain;
+			const isSameDomain = hostname === domain || hostname.endsWith(`.${domain}`);
 
 			if (isSameDomain) {
 				return CONTINUE;

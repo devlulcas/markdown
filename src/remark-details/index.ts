@@ -1,8 +1,8 @@
 import { h } from "hastscript";
 import type * as mdast from "mdast";
-import type {} from "mdast-util-directive";
+import type { } from "mdast-util-directive";
 import type * as unified from "unified";
-import { visit } from "unist-util-visit";
+import { CONTINUE, visit } from "unist-util-visit";
 import type { VFile } from "vfile";
 
 type RemarkDetails = unified.Plugin<[], mdast.Root>;
@@ -19,7 +19,7 @@ export const remarkDetails: RemarkDetails = () => {
 				const [first] = node.children.slice(0, 1);
 
 				if (!first || first.type !== "text") {
-					file.fail(
+					return file.fail(
 						"details: summary must have a text node as first child",
 						node,
 					);
@@ -40,7 +40,7 @@ export const remarkDetails: RemarkDetails = () => {
 				const firstChild = node.children?.slice(0, 1)[0];
 
 				if (!firstChild) {
-					file.fail("details: at least one child is required", node);
+					return file.fail("details: at least one child is required", node);
 				}
 
 				const detailsNode = h("details", { open });
@@ -48,6 +48,8 @@ export const remarkDetails: RemarkDetails = () => {
 				data.hName = detailsNode.tagName;
 				data.hProperties = detailsNode.properties;
 			}
+
+			return CONTINUE;
 		});
 	};
 };
