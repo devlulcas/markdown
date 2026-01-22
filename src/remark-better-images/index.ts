@@ -1,3 +1,4 @@
+import type { Properties } from "hastscript";
 import type * as mdast from "mdast";
 import type * as unified from "unified";
 import { CONTINUE, visit } from "unist-util-visit";
@@ -23,8 +24,8 @@ type RemarkBetterImages = unified.Plugin<
 	mdast.Root
 >;
 
-interface ImageData extends mdast.ImageData {
-	loading?: "lazy";
+interface ImageData extends Omit<mdast.ImageData, "hProperties"> {
+	hProperties?: Properties;
 }
 
 export const remarkBetterImages: RemarkBetterImages = (pluginOptions) => {

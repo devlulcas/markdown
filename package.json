@@ -5,6 +5,28 @@
 	"type": "module",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./remark-better-images": {
+			"types": "./dist/remark-better-images/index.d.ts",
+			"import": "./dist/remark-better-images/index.js"
+		},
+		"./remark-details": {
+			"types": "./dist/remark-details/index.d.ts",
+			"import": "./dist/remark-details/index.js"
+		},
+		"./remark-external-url": {
+			"types": "./dist/remark-external-url/index.d.ts",
+			"import": "./dist/remark-external-url/index.js"
+		},
+		"./remark-notes": {
+			"types": "./dist/remark-notes/index.d.ts",
+			"import": "./dist/remark-notes/index.js"
+		}
+	},
 	"files": [
 		"dist",
 		"package.json",
