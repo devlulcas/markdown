@@ -7,11 +7,6 @@ type RemarkExternalUrlOptions = {
 	domain: string;
 };
 
-interface LinkData extends mdast.LinkData {
-	hName?: string;
-	hProperties?: Record<string, unknown>;
-}
-
 type RemarkExternalUrl = unified.Plugin<[RemarkExternalUrlOptions], mdast.Root>;
 export const remarkExternalUrl: RemarkExternalUrl = ({ domain }) => {
 	if (!domain) {
@@ -46,7 +41,7 @@ export const remarkExternalUrl: RemarkExternalUrl = ({ domain }) => {
 			url.searchParams.set("utm_campaign", "external");
 
 			node.data ??= {};
-			const data: LinkData = node.data;
+			const data = node.data;
 
 			const anchorNode = h("a", {
 				href: url.toString(),
@@ -56,6 +51,8 @@ export const remarkExternalUrl: RemarkExternalUrl = ({ domain }) => {
 
 			data.hName = anchorNode.tagName;
 			data.hProperties = anchorNode.properties;
+
+			return CONTINUE;
 		});
 	};
 };

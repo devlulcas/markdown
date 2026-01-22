@@ -1,5 +1,6 @@
 import { h } from "hastscript";
 import type * as mdast from "mdast";
+import type { } from "mdast-util-directive";
 import type * as unified from "unified";
 import { visit } from "unist-util-visit";
 import type { VFile } from "vfile";
