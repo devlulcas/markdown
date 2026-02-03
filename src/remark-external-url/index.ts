@@ -2,6 +2,7 @@ import { h } from "hastscript";
 import type * as mdast from "mdast";
 import type * as unified from "unified";
 import { CONTINUE, visit } from "unist-util-visit";
+import type { HastData } from "../@types/hast.js";
 
 type RemarkExternalUrlOptions = {
 	domain: string;
@@ -39,8 +40,7 @@ export const remarkExternalUrl: RemarkExternalUrl = ({ domain }) => {
 			url.searchParams.set("utm_medium", "link");
 			url.searchParams.set("utm_campaign", "external");
 
-			node.data ??= {};
-			const data = node.data;
+			const data = (node.data ?? {}) as HastData;
 
 			const anchorNode = h("a", {
 				href: url.toString(),

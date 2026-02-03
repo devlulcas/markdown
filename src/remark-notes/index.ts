@@ -1,9 +1,9 @@
 import { h } from "hastscript";
 import type * as mdast from "mdast";
-import type { } from "mdast-util-directive";
 import type * as unified from "unified";
 import { visit } from "unist-util-visit";
 import type { VFile } from "vfile";
+import type { HastData } from "../@types/hast.js";
 
 type RemarkNotesOptions = {
 	validClasses?: string[];
@@ -17,8 +17,7 @@ export const remarkNotes: RemarkNotes = (
 	return (tree: mdast.Root, file: VFile) => {
 		visit(tree, (node) => {
 			if (node.type === "containerDirective" && node.name === "note") {
-				node.data ??= {};
-				const data = node.data;
+				const data = (node.data ?? {}) as HastData;
 				const attributes = node.attributes || {};
 				const className = attributes.class || "";
 

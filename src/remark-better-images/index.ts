@@ -1,7 +1,7 @@
-import type { Properties } from "hastscript";
 import type * as mdast from "mdast";
 import type * as unified from "unified";
 import { CONTINUE, visit } from "unist-util-visit";
+import type { HastData } from "../@types/hast.js";
 
 type RemarkBetterImagesOptions = {
 	/**
@@ -24,10 +24,6 @@ type RemarkBetterImages = unified.Plugin<
 	mdast.Root
 >;
 
-interface ImageData extends Omit<mdast.ImageData, "hProperties"> {
-	hProperties?: Properties;
-}
-
 export const remarkBetterImages: RemarkBetterImages = (pluginOptions) => {
 	const options = {
 		...DEFAULT_OPTIONS,
@@ -39,8 +35,7 @@ export const remarkBetterImages: RemarkBetterImages = (pluginOptions) => {
 			if (node.type !== "image") return CONTINUE;
 			node.url = new URL(node.url, options.baseUrl).toString();
 
-			node.data ??= {};
-			const data: ImageData = node.data;
+			const data = (node.data ?? {}) as HastData;
 			data.hProperties ??= {};
 			const properties = data.hProperties;
 

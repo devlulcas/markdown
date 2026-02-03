@@ -6,8 +6,8 @@ export default defineConfig((opts) => ({
 	format: ["esm"],
 	dts: true,
 	clean: !opts.watch,
-	sourcemap: true,
 	minify: false,
 	outDir: "dist",
-	target: "es2022",
+	sourcemap: true,
+	target: "es2024",
 }));

@@ -4,6 +4,7 @@ import type { } from "mdast-util-directive";
 import type * as unified from "unified";
 import { CONTINUE, visit } from "unist-util-visit";
 import type { VFile } from "vfile";
+import type { HastData } from "../@types/hast.js";
 
 type RemarkDetails = unified.Plugin<[], mdast.Root>;
 export const remarkDetails: RemarkDetails = () => {
@@ -26,14 +27,14 @@ export const remarkDetails: RemarkDetails = () => {
 				}
 
 				const summaryNode = h("summary", first.value);
+				const data = node.data as HastData;
 
-				node.data.hName = summaryNode.tagName;
-				node.data.hProperties = summaryNode.properties;
+				data.hName = summaryNode.tagName;
+				data.hProperties = summaryNode.properties;
 			}
 
 			if (node.type === "containerDirective" && node.name === "details") {
-				node.data ??= {};
-				const data = node.data;
+				const data = (node.data ?? {}) as HastData;
 				const attributes = node.attributes || {};
 				const open = "open" in attributes ? attributes.open : false;
 
